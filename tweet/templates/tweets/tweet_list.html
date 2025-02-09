@@ -5,22 +5,26 @@
 {% block content %}
 <div class="my-8">
     <h1 class="text-3xl font-semibold mb-4">All Tweets</h1>
+
+    <!-- Search Form -->
+    <form method="get" action="{% url 'tweet_list' %}" class="mb-4">
+        <input type="text" name="q" value="{{ query }}" class="p-2 border border-gray-300 rounded-md" placeholder="Search tweets...">
+        <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Search</button>
+    </form>
+
     <a href="{% url 'tweet_create' %}" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Create New Tweet</a>
+    
     <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {% for tweet in tweets %}
         <div class="bg-white p-4 shadow-md rounded-md flex flex-col">
-            <!-- Box for image and tweet info -->
             <div class="flex-shrink-0 mb-2">
                 {% if tweet.photo %}
                 <img src="{{ tweet.photo.url }}" alt="Tweet Photo" class="w-full h-32 object-cover rounded-md">
                 {% endif %}
             </div>
-
-            <!-- Box for user info, text, and timestamp -->
             <div class="flex-1">
                 <h3 class="font-semibold text-lg">{{ tweet.user.username }}</h3>
                 <p class="text-base">
-                    <!-- Display only part of the tweet text initially -->
                     {{ tweet.text|truncatewords:15 }} 
                     {% if tweet.text|length > 100 %}
                     <a href="{% url 'tweet_detail' tweet.pk %}" class="text-blue-600 hover:underline cursor-pointer">... View More</a>
@@ -28,13 +32,9 @@
                 </p>
                 <p class="text-gray-500 text-xs">{{ tweet.created_at }}</p>
             </div>
-
-            <!-- Box for buttons -->
             <div class="flex space-x-2 mt-2">
                 <a href="{% url 'tweet_detail' tweet.pk %}" class="bg-blue-600 text-white py-1 px-2 rounded-md hover:bg-blue-700">View</a>
-                
                 {% if tweet.user == user %}
-                <!-- Show Edit and Delete buttons only for the tweet's author -->
                 <a href="{% url 'tweet_edit' tweet.pk %}" class="bg-blue-600 text-white py-1 px-2 rounded-md hover:bg-blue-700">Edit</a>
                 <a href="{% url 'tweet_delete' tweet.pk %}" class="bg-red-600 text-white py-1 px-2 rounded-md hover:bg-red-700">Delete</a>
                 {% endif %}

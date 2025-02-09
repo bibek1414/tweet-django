@@ -20,6 +20,15 @@
                 <svg class="fill-current h-5 w-5" viewBox="0 0 20 20"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
             </button>
             <div class="hidden lg:flex lg:items-center lg:w-auto" id="navbar-content">
+                <ul class="flex flex-col lg:flex-row space-y-2 lg:space-y-0 lg:space-x-6">
+                    <!-- Removed Home Link and Dropdown button -->
+                    <li class="w-full">
+                        <a class="block text-gray-700 hover:text-blue-600 transition duration-200 py-2 px-4" href="#">Link</a>
+                    </li>
+                    <li class="w-full">
+                        <a class="block text-gray-400 cursor-not-allowed py-2 px-4" href="#" aria-disabled="true">Disabled</a>
+                    </li>
+                </ul>
                 <form class="flex ml-4" role="search">
                     <input class="border rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" type="search" placeholder="Search" aria-label="Search">
                     <button class="bg-blue-600 text-white rounded-r-md px-4 py-2 hover:bg-blue-700 transition duration-200" type="submit">Search</button>
