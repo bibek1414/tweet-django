@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}Tweet Detail{% endblock %}
+
+{% block content %}
+<div class="my-8 max-w-3xl mx-auto px-4">
+    <h1 class="text-3xl font-semibold text-center mb-4">{{ tweet.user.username }}'s Tweet</h1>
+    
+    <!-- Tweet Text -->
+    <p class="mt-4 text-lg text-gray-800">{{ tweet.text }}</p>
+    
+    <!-- Tweet Photo -->
+    {% if tweet.photo %}
+    <div class="mt-6">
+        <img src="{{ tweet.photo.url }}" alt="Tweet Photo" class="w-full rounded-lg shadow-lg">
+    </div>
+    {% endif %}
+    
+    <!-- Tweet Timestamp -->
+    <p class="text-gray-500 text-sm mt-4 text-center">{{ tweet.created_at }}</p>
+    
+    <!-- Action Links -->
+    <div class="mt-6 flex justify-center space-x-4">
+        <a href="{% url 'tweet_edit' tweet.pk %}" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Edit</a>
+        <a href="{% url 'tweet_delete' tweet.pk %}" class="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700">Delete</a>
+        <a href="{% url 'tweet_list' %}" class="bg-gray-600 text-white py-2 px-4 rounded-md hover:bg-gray-700">Back to Tweet List</a>
+    </div>
+</div>
+{% endblock %}

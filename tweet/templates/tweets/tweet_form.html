@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Create/Edit Tweet{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-semibold mb-4">{{ form.instance.pk|yesno:"Edit Tweet,Create New Tweet" }}</h1>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700">Save Tweet</button>
+</form>
+
+<a href="{% url 'tweet_list' %}" class="text-blue-600 hover:underline">Back to Tweet List</a>
+{% endblock %}
